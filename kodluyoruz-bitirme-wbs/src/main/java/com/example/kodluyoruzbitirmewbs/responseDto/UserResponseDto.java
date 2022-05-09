@@ -1,21 +1,16 @@
-package com.example.kodluyoruzbitirmewbs.requestDto;
-
+package com.example.kodluyoruzbitirmewbs.responseDto;
 
 import com.example.kodluyoruzbitirmewbs.entity.UserRole;
 import lombok.Data;
 
 @Data
-public class UserSaveRequestDto {
+public class UserResponseDto {
+
     private String name;
 
     private String surname;
 
     private String email;
 
-    private String password;
-
     private UserRole role;
-
-    private Integer teamId;
-
 }

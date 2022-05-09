@@ -1,18 +1,14 @@
-package com.example.kodluyoruzbitirmewbs.requestDto;
+package com.example.kodluyoruzbitirmewbs.responseDto;
 
-import com.example.kodluyoruzbitirmewbs.entity.User;
 import lombok.Data;
 
-
 @Data
-public class WorkSaveRequestDto {
-
+public class WorkResponseDto {
     private String workName;
 
     private String workComment;
 
     private int parentId;
-
 
     private Integer userId;
 }

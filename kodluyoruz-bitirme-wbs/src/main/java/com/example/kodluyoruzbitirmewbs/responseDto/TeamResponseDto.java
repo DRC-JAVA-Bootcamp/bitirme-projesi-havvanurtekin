@@ -1,13 +1,12 @@
-package com.example.kodluyoruzbitirmewbs.requestDto;
+package com.example.kodluyoruzbitirmewbs.responseDto;
 
 import com.example.kodluyoruzbitirmewbs.entity.User;
 import lombok.Data;
 
 import java.util.List;
-
-
 @Data
-public class TeamSaveRequestDto {
+public class TeamResponseDto {
+    private int maxMemberCount = 10;
 
     private int memberCount;
 

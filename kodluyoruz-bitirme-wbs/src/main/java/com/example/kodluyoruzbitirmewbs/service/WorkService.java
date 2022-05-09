@@ -1,31 +1,79 @@
 package com.example.kodluyoruzbitirmewbs.service;
 
+import com.example.kodluyoruzbitirmewbs.entity.Team;
 import com.example.kodluyoruzbitirmewbs.entity.User;
 import com.example.kodluyoruzbitirmewbs.entity.Work;
+import com.example.kodluyoruzbitirmewbs.repository.TeamRepository;
+import com.example.kodluyoruzbitirmewbs.repository.UserRepository;
 import com.example.kodluyoruzbitirmewbs.repository.WorkRepository;
+import com.example.kodluyoruzbitirmewbs.responseDto.WorkResponseDto;
 import com.example.kodluyoruzbitirmewbs.requestDto.WorkSaveRequestDto;
+import com.example.kodluyoruzbitirmewbs.util.ConvertUtil;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class WorkService {
     @Autowired
     WorkRepository workRepository;
 
-    public void saveWork(WorkSaveRequestDto workSaveRequestDto){
-        String nameRequestDto = workSaveRequestDto.getWorkName();
-        String commentRequestDto = workSaveRequestDto.getWorkComment();
-        int parentRequestDto = workSaveRequestDto.getParentId();
-        User userRequestDto = workSaveRequestDto.getUser();
+    @Autowired
+    TeamRepository teamRepository;
 
-        Work work = new Work();
+    @Autowired
+    UserRepository userRepository;
 
-        work.setWorkName(nameRequestDto);
-        work.setWorkComment(commentRequestDto);
-        work.setParentId(parentRequestDto);
-        work.setUser(userRequestDto);
+    @Autowired
+    ConvertUtil convertUtil;
 
+    ModelMapper modelMapper = new ModelMapper();
+
+
+
+    public int saveWork(WorkSaveRequestDto workSaveRequestDto){
+        Work work = convertUtil.convertToWorkFromWorkRequestDTO(workSaveRequestDto);
         work = workRepository.save(work);
+        return work.getId();
 
+    }
+
+    public List<WorkResponseDto> findAllWorkByTeamId(Integer teamId) {
+
+        Team team = teamRepository.findById(teamId).get();
+        List<Work> workList = workRepository.findAllByTeam(team);
+        List<WorkResponseDto> workResponseDtos = new ArrayList<>();
+        for(Work work : workList){
+            WorkResponseDto workResponseDto = modelMapper.map(work, WorkResponseDto.class);
+            workResponseDtos.add(workResponseDto);
+        }
+        return workResponseDtos;
+    }
+
+    public List<WorkResponseDto> findAllWorkByUserId(Integer userId) {
+        User user = userRepository.findById(userId).get();
+        List<Work> workList = workRepository.findAllByUser(user);
+        List<WorkResponseDto> workResponseDtos = new ArrayList<>();
+        for(Work work : workList){
+            WorkResponseDto workResponseDto = modelMapper.map(work, WorkResponseDto.class);
+            workResponseDtos.add(workResponseDto);
+        }
+        return workResponseDtos;
+
+    }
+
+    public boolean deleteWork(Integer workId) {
+        Work work = workRepository.findById(workId).get();
+        List<Work> workList = workRepository.findAllById(workId);
+        for(Work w : workList){
+            if(work.getId() == w.getParentId()){
+               workList.remove(work);
+            }
+        }
+        workRepository.delete(work);
+        return true;
     }
 }
