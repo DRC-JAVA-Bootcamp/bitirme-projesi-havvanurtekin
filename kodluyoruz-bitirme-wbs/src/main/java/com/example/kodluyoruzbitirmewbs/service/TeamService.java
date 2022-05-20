@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+//team service
 @Service
 public class TeamService {
     @Autowired
@@ -29,6 +30,7 @@ public class TeamService {
     @Autowired
     ModelMapper modelMapper;
 
+    //takımı ekle id döndür
     public int saveTeam(TeamSaveRequestDto teamSaveRequestDto) {
 
        Team team = convertUtil.convertToTeamFromTeamRequestDTO(teamSaveRequestDto);
@@ -37,6 +39,7 @@ public class TeamService {
     }
 
 
+    //takımların hepsini listele ve listeyi döndür
     public List<TeamResponseDto> findAllTeam() {
         Iterable<Team> teamList = teamRepository.findAll();
         List<TeamResponseDto> teamResponseDtos = new ArrayList<>();
@@ -47,6 +50,7 @@ public class TeamService {
         return teamResponseDtos;
     }
 
+    //takımı idsine göre sil
     public boolean deleteTeamById(Integer teamId) {
         Team team = teamRepository.findById(teamId).get();
         teamRepository.delete(team);

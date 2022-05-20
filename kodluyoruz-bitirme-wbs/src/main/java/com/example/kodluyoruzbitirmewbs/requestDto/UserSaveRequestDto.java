@@ -3,7 +3,7 @@ package com.example.kodluyoruzbitirmewbs.requestDto;
 
 import com.example.kodluyoruzbitirmewbs.entity.UserRole;
 import lombok.Data;
-
+//user save request dto
 @Data
 public class UserSaveRequestDto {
     private String name;

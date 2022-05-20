@@ -22,7 +22,7 @@ public class ConvertUtil {
     @Autowired
     TeamRepository teamRepository;
 
-
+    //UserSaveRequestDto converter to User
     public User convertToUserFromUserRequestDto(UserSaveRequestDto userSaveRequestDto){
         String nameRequestDto = userSaveRequestDto.getName();
         String surnameRequestDto = userSaveRequestDto.getSurname();
@@ -45,6 +45,7 @@ public class ConvertUtil {
 
     }
 
+    //TeamSaveRequestDto converter to team
     public Team convertToTeamFromTeamRequestDTO(TeamSaveRequestDto teamSaveRequestDto){
         int teamMemberCountRequestDto = teamSaveRequestDto.getMemberCount();
         List<User> teamMemberRequestDto = teamSaveRequestDto.getUser();
@@ -58,6 +59,7 @@ public class ConvertUtil {
 
     }
 
+    //WorkSaveRequestDto converter to work
     public Work convertToWorkFromWorkRequestDTO(WorkSaveRequestDto workSaveRequestDto){
         String nameRequestDto = workSaveRequestDto.getWorkName();
         String commentRequestDto = workSaveRequestDto.getWorkComment();

@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+//user service
 @Service
 public class UserService {
     @Autowired
@@ -29,6 +29,7 @@ public class UserService {
     @Autowired
     ModelMapper modelMapper;
 
+    //yeni kullanıcı ekle idsini döndür
     public int saveUser(UserSaveRequestDto userSaveRequestDto) {
         User user = convertUtil.convertToUserFromUserRequestDto(userSaveRequestDto);
         user = userRepository.save(user);
@@ -36,6 +37,7 @@ public class UserService {
         return user.getId();
     }
 
+    //takımın tüm memberlarını listele ve döndür
     public List<UserResponseDto> findAllUsersByTeamId(Integer teamId) {
         Team team = teamRepository.findById(teamId).get();
         List<User> userList = userRepository.findAllByTeam(team);
@@ -47,6 +49,7 @@ public class UserService {
         return userResponseDtos;
     }
 
+    //takımdan üye sil
     public boolean deleteUserByIdFromTeam(Integer userId) {
         User user = userRepository.findById(userId).get();
         Integer teamId = user.getTeam().getId();
@@ -55,7 +58,7 @@ public class UserService {
         userRepository.delete(user);
         return true;
     }
-
+   //tüm üyeleri bul ve listele
     public List<UserResponseDto> findAllUser() {
         Iterable<User> userList = userRepository.findAll();
         List<UserResponseDto> userResponseDtos = new ArrayList<>();

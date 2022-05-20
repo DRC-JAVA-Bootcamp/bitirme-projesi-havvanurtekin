@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+
+//team exception
 @RestControllerAdvice
 public class TeamExceptionHandling {
     @ExceptionHandler(Exception.class)

@@ -5,11 +5,13 @@ import lombok.Data;
 
 import javax.persistence.*;
 
-
+//work entity
 @Entity
 @Table
 @Data
 public class Work {
+
+    //features
     @Id
     @Column(name = "id", nullable = false)
     private int id;

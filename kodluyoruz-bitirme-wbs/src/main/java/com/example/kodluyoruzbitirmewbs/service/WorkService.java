@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+//work service
 @Service
 public class WorkService {
     @Autowired
@@ -30,10 +31,12 @@ public class WorkService {
     @Autowired
     ConvertUtil convertUtil;
 
+    //model mapper
     ModelMapper modelMapper = new ModelMapper();
 
 
 
+    //yeni iş ekle id döndür
     public int saveWork(WorkSaveRequestDto workSaveRequestDto){
         Work work = convertUtil.convertToWorkFromWorkRequestDTO(workSaveRequestDto);
         work = workRepository.save(work);
@@ -41,6 +44,7 @@ public class WorkService {
 
     }
 
+    //takım idsine göre takımın yaptığı tüm işleri döndür listele
     public List<WorkResponseDto> findAllWorkByTeamId(Integer teamId) {
 
         Team team = teamRepository.findById(teamId).get();
@@ -53,6 +57,7 @@ public class WorkService {
         return workResponseDtos;
     }
 
+    //user id ye göre yapılan işleri listele
     public List<WorkResponseDto> findAllWorkByUserId(Integer userId) {
         User user = userRepository.findById(userId).get();
         List<Work> workList = workRepository.findAllByUser(user);
@@ -65,6 +70,7 @@ public class WorkService {
 
     }
 
+    //işi idsine göre sil silinince true döndür
     public boolean deleteWork(Integer workId) {
         Work work = workRepository.findById(workId).get();
         List<Work> workList = workRepository.findAllById(workId);

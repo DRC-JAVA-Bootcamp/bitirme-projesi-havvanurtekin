@@ -10,36 +10,45 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//work controller
 @RestController
-@RequestMapping("/work")
+@RequestMapping("/work")//istek atılacak path
 public class WorkController {
 
     @Autowired
     WorkService workService;
 
-    @PostMapping("/saveWork")
+    //yeni iş ekle
+    @PostMapping("/saveWork")//istek atılacak path
     public ResponseEntity<Integer> saveWork(@RequestBody WorkSaveRequestDto workSaveRequestDto){
         Integer workId =  workService.saveWork(workSaveRequestDto);
+        //response entitye 200 döndür
         return new ResponseEntity<>(workId, HttpStatus.OK);
     }
 
-    @GetMapping("/findAllWorkByTeamId")
+    //takım idsine göre tüm işleri listele
+    @GetMapping("/findAllWorkByTeamId")//istek atılacak path
     public ResponseEntity<List<WorkResponseDto>> findAllWorkByTeamId(@RequestParam Integer teamId){
 
         List<WorkResponseDto> worksResponseDtoList = workService.findAllWorkByTeamId(teamId);
+        //response entitye 200 döndür
         return new ResponseEntity<>(worksResponseDtoList, HttpStatus.OK);
     }
 
-    @GetMapping("/findAllWorksByUserId")
+    //user id'ye göre tüm işleri listele
+    @GetMapping("/findAllWorksByUserId")//istek atılacak path
     public ResponseEntity<List<WorkResponseDto>> findAllWorkByUserId(@RequestParam Integer userId){
 
         List<WorkResponseDto> worksResponseDtoList = workService.findAllWorkByUserId(userId);
+        //response entitye 200 döndür
         return new ResponseEntity<>(worksResponseDtoList, HttpStatus.OK);
     }
 
-    @DeleteMapping("/deleteWork")
+    //work id'ye göre işi sil
+    @DeleteMapping("/deleteWork")//istek atılacak path
     public ResponseEntity<Boolean> deleteWork(@RequestParam Integer workId){
         boolean deleteWork = workService.deleteWork(workId);
+        //response entitye 200 döndür
         return new ResponseEntity<>(deleteWork, HttpStatus.OK);
     }
 }

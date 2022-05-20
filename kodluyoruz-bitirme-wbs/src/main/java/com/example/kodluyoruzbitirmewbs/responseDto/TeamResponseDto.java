@@ -4,6 +4,7 @@ import com.example.kodluyoruzbitirmewbs.entity.User;
 import lombok.Data;
 
 import java.util.List;
+//team response dto
 @Data
 public class TeamResponseDto {
     private int maxMemberCount = 10;

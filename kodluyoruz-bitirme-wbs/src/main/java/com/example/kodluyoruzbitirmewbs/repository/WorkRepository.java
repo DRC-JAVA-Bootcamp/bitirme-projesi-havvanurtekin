@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+//work repository
 @Repository
 public interface WorkRepository extends CrudRepository<Work, Integer> {
     List<Work> findAllByTeam(Team team);
