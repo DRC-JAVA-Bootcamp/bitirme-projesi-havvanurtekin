@@ -13,10 +13,10 @@ public class Team {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
+    @Column(nullable = false)
     private int maxMemberCount = 10;
 
-    @Column
+    @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int memberCount;
 

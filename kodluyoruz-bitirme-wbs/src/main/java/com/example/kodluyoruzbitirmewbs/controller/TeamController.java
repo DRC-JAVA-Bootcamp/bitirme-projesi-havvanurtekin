@@ -1,12 +1,8 @@
 package com.example.kodluyoruzbitirmewbs.controller;
 
 import com.example.kodluyoruzbitirmewbs.requestDto.TeamSaveRequestDto;
-
-import com.example.kodluyoruzbitirmewbs.requestDto.UserSaveRequestDto;
 import com.example.kodluyoruzbitirmewbs.responseDto.TeamResponseDto;
 import com.example.kodluyoruzbitirmewbs.service.TeamService;
-
-import com.example.kodluyoruzbitirmewbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +18,6 @@ public class TeamController {
         @Autowired
         TeamService teamService;
 
-        @Autowired
-        UserService userService;
 
         @PostMapping("/saveTeam")
         public ResponseEntity<Integer> saveTeam(@RequestBody TeamSaveRequestDto teamSaveRequestDto){
